@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shrad.shopsqlitedb.ShopDetailSignUpForm">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ShopName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your Shop name"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/shopNameTxt"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+            <TextView
+                android:id="@+id/regNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your business registration number"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/regnoTxt"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/gstNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your GST number"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/gstNumberTxt"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/shopPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your Shop Phone number"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/shopPhoneNumberTxt"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/shopwebsiteaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your shop website address"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/shopwebsiteaddressTxt"
+                android:layout_height="wrap_content"
+                android:inputType="textUri"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/streetAddress1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your street address"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/streetAddress1Txt"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/suburb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your suburb name"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/suburbTxt"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your city name"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/CityTxt"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your country name"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/countryTxt"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/postcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your post code"
+                android:textSize="8pt"
+                android:layout_marginLeft="16dp">
+            </TextView>
+            <EditText
+                android:id="@+id/postcodeTxt"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="16dp">
+            </EditText>
+
+            <TextView
+            android:id="@+id/Id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your id to update or delete"
+            android:textSize="8pt"
+            android:layout_marginLeft="16dp">
+        </TextView>
+        <EditText
+            android:id="@+id/idTxt"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="16dp">
+        </EditText>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add data"
+                android:id="@+id/btnAddData"
+                android:onClick="addData"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Data"
+                android:id="@+id/btnDeleteData"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All data"
+                android:id="@+id/btnViewAllData"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update data"
+                android:id="@+id/btnUpdateData"
+                android:onClick="updateData"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
