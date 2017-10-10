@@ -1,0 +1,231 @@
+package com.example.shrad.shopsqlitedb;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by shrad on 17/09/2017.
+ */
+
+/**
+ * This class establishes connection with Database & creates the table &
+ * updates them upon request when the respective button are pressed in the ShopDetailSignUpForm & ShopOwnerSignUp Activity.
+ */
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+	/**
+	 * The below constants variables are used to access the table columns in order to refer them to the
+	 * column name when required for insertion, update & delete operation.
+	 */
+	private static final int DATABASE_VERSION = 1;
+	private static final String DATABASE_NAME = "ShopDatabase.db";
+	private static final String TABLE_NAME = "ShopOwnerInfoTable";
+	private static final String COl_1 = "id";
+	private static final String COl_2 = "ownerFirstName";
+	private static final String COl_3 = "ownerLastName";
+	private static final String COl_4 = "ownerMobileNo";
+	private static final String COl_5 = "ownerEmailId";
+	private static final String COl_6 = "ownerPassword";
+	private static final String COl_7 = "pinNumber";
+	private static final String COL_8 = "shop_id";
+
+	private static final String TABLE_NAME2 = "ShopDetailsTable";
+	private static final String COl2_1 = "shop_id";
+	private static final String COl2 = "shopName";
+	private static final String COl2_3 = "shopRegNo";
+	private static final String COl2_4 = "placesType";
+	private static final String COl2_5 = "shopPhoneno";
+	private static final String COl2_6 = "shopWebsiteLink";
+	private static final String COl2_7 = "shopStreetAddress";
+	private static final String COl2_8 = "shopSuburb";
+	private static final String COl2_9 = "shopCity";
+	private static final String COl2_10 = "shopCountry";
+	private static final String COl2_11 = "shopPostcode";
+	private static final String COl2_12 = "ratings";
+
+	/**
+	 * The constants below declared are used to create tables when the app initially starts.
+	 * In order for easy setup, we used the column name straight away, because using the constant was making the statement look too complex.
+	 */
+	private static final String tableSql = "CREATE TABLE " + TABLE_NAME + "( id INTEGER PRIMARY KEY AUTOINCREMENT, ownerFirstName TEXT, " +
+			"ownerLastName TEXT, ownerMobileNo INTEGER, ownerEmailId TEXT,ownerPassword TEXT, pinNumber INTEGER,shop_id INTEGER) ";
+	private static final String table2sql = "CREATE TABLE " + TABLE_NAME2 + "(" + COl2_1 + " INTEGER PRIMARY KEY," +
+			"shopName TEXT, shopRegNo INTEGER, placesType TEXT, shopPhoneno INTEGER," +
+			"shopWebsiteLink TEXT, shopStreetAddress TEXT, shopSuburb TEXT," +
+			"shopCity TEXT,  shopCountry TEXT,shopPostcode INTEGER,ratings INTEGER) ";
+
+
+	private boolean foundData;				//this variable is used to check if the record to be updated or deleted is found or not.
+
+
+	/**
+	 * calling the super DatabaseHelper constructor with our database name & database version.
+	 * Creates a helper object to create, open, and/or manage our database.
+	 * @param context
+	 */
+	public DatabaseHelper(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		// The below statement was used to create a writable database initially before 
+		// any table creation statement can be executed. It was the very beginning we used this statement,
+		// to create/set-up our database. Once the database is created, we don't need this statement any more,
+		// that is why this statement is commented at the moment & will be in future as well.
+		//        SQLiteDatabase db = this.getWritableDatabase();
+	}
+
+	/**
+	 * Called when the database is created for the first time. 
+	 * This is where the creation of tables happens.
+	 * onCreated method creates our table using the myDB SQLiteDatabase object by calling the 
+	 * execSQL method, which requires create table statement string. 
+	 * This string was initially already created using tableSql & table2sql String in declaration section.
+	 * @param myDb - the database.
+	 */
+	@Override
+	public void onCreate(SQLiteDatabase myDb) {
+		myDb.execSQL(tableSql);
+		myDb.execSQL(table2sql);
+
+	}
+
+	/**
+	 * Called when the database needs to be upgraded. 
+	 * The implementation is uses this method to drop tables if existed,and 
+	 * create these tables again by calling the onCreate method. 
+	 * @param myDb the database
+	 * @param i  the old database version
+	 * @param i1 the new database version
+	 */
+	@Override
+	public void onUpgrade(SQLiteDatabase myDb, int i, int i1) {
+		myDb.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		myDb.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
+		onCreate(myDb);
+	}
+
+	/** The main functionality of this method is to Inserts data into ShopOwnersInfoTable.
+	 *  In this method, we are creating a SQLiteDatabase object using the getWriteableDatabase
+	 *  method in order to perform insertion operation into the database table.
+	 *  ContentValues object is used to create empty set of values for the columns of the table.
+	 *  It is like a map that contains the initial column values for the row. 
+	 *  The keys should be the column names and the values should be the column values.
+	 *  The put function adds value to the map. Then, this ContentValues object is passed to insert function,
+	 *  in order to insert  a row into database.
+	 * @param firstName - the firstname value passed from the textfield
+	 * @param lastName - the lastname value passed from the textfield
+	 * @param mobile_number - the mobile_number value passed from the textfield
+	 * @param emailID - the emailID value passed from the textfield
+	 * @param password - the password value passed from the textfield
+	 * @param pinNumber - the pinNumber value passed from the textfield
+	 * @param shop_id - the shop_id value passed from the textfield
+	 * @return boolean value to update the customer with -1 if record is not inserted,
+	 * else, the  row ID of the newly inserted row obtained from insert function of
+	 * SQLiteDatabase database object db.
+	 */
+	public boolean insertData(String firstName, String lastName, String mobile_number,      String emailID,String password,String pinNumber,String shop_id){
+		SQLiteDatabase db =this.getWritableDatabase();
+		ContentValues contentValues = new ContentValues();
+		//contentValues.put(COL_1,1);
+		contentValues.put(COl_2,firstName);
+		contentValues.put(COl_3,lastName);
+		contentValues.put(COl_4, mobile_number);
+		contentValues.put(COl_5,emailID);
+		contentValues.put(COl_6,password);
+		contentValues.put(COl_7,pinNumber);
+		contentValues.put(COL_8,shop_id);
+		long result = db.insert(TABLE_NAME,null,contentValues);
+		if(result == -1)
+			return false;
+		else
+			return true;
+
+	}
+
+	/**
+	 * The main functionality of this method is to Inserts data into ShopDetailsInfoTable.In this method,
+	 * we are performing similar operations to insertData() method.
+	 * In this method, we are creating a SQLiteDatabase object using the getWriteableDatabase
+	 * method in order to perform insertion operation into the database table "ShopDetailsTable".
+	 * ContentValues object is used to create empty set of values for the columns of the table.
+	 * It is like a map that contains the initial column values for the row. 
+	 * The keys should be the column names and the values should be the column values.
+	 * The put function adds value to the map. Then, this ContentValues object is passed to insert function,
+	 * in order to insert  a row into database.
+	 * The parameter values are the values inserted into the textfield,
+	 * that are passed in order to insert a record with those values.
+	 * @param id
+	 * @param shopName
+	 * @param shopRegNo
+	 * @param shopPlaceType
+	 * @param shopPhoneNo
+	 * @param shopWebsiteLink
+	 * @param streetAddress
+	 * @param suburb
+	 * @param city
+	 * @param country
+	 * @param postcode
+	 * @param ratings
+	 * @return boolean value to update the customer with -1 if record is not inserted,
+	 * else, the  row ID of the newly inserted row obtained from insert function of
+	 * SQLiteDatabase database object db.
+	 */
+	public boolean insertShopData(String id,String shopName, String shopRegNo, String shopPlaceType, String shopPhoneNo,
+			String shopWebsiteLink, String streetAddress, String suburb, String city,
+			String country, String postcode,String ratings){
+		SQLiteDatabase db =this.getWritableDatabase();
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(COl2_1,id);
+		contentValues.put(COl2,shopName);
+		contentValues.put(COl2_3,shopRegNo);
+		contentValues.put(COl2_4,shopPlaceType);
+		contentValues.put(COl2_5,shopPhoneNo);
+		contentValues.put(COl2_6,shopWebsiteLink);
+		contentValues.put(COl2_7,streetAddress);
+		contentValues.put(COl2_8,suburb);
+		contentValues.put(COl2_9,city);
+		contentValues.put(COl2_10,country);
+		contentValues.put(COl2_11,postcode);
+		contentValues.put(COl2_12,ratings);
+		long result = db.insert(TABLE_NAME2,null,contentValues);
+		if(result == -1)
+			return false;
+		else
+			return true;
+
+	}
+
+
+	/**Receives res object for all data from ShopOwnersInfoTable
+	 * In this method, we are creating a SQLiteDatabase object in order for reading the data from database.
+	 * To get all data for the provided table name in the parameter, we are using the rawQuery method of the
+	 * SQLiteDatabase, which returns a cursor over the result set. This method take sql statement as its first parameter,
+	 * & second parameter is the selection arguments which can be used if we want specific data ( using a where clause),
+	 * in our case, we just want all data, so we specified null.
+	 * The cursor object provides read-write access to the result set returned by the database query.
+	 * This method is abstracted to its highest possible level in order to get all data from any table_name specified in the parameter.
+	 * @param tablename
+	 * @return a Cursor object, which is positioned before the first entry
+	 */
+	public Cursor getAllData(String tablename){
+		SQLiteDatabase db =this.getWritableDatabase();
+		Cursor res = db.rawQuery("Select * from "+tablename,null);
+		if (res.getCount()>0)
+			foundData =true;
+		else
+			foundData=false;
+		return  res;
+	}
+
+	/**
+	 * @return true if the data is found,else false.
+	 */
+	public boolean foundData(){
+		return  this.foundData;
+	}
+
+}
+
+
+
